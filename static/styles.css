@@ -1,0 +1,81 @@
+/* General styling for the body of page */
+body {
+    background-color: #f7f7f7; /* Light gray background color */
+    color: #333333; /* Dark gray text color for readability */
+    font-family: 'Open Sans', sans-serif; /* Clean, modern font for body text */
+    margin: 0; /* Remove default margin */
+    padding: 0; /* Remove default padding */
+    display: flex; /* Use Flexbox for layout */
+    justify-content: center; /* Center content horizontally */
+    align-items: center; /* Center content vertically */
+    flex-direction: column; /* Stack content vertically */
+    height: 100vh; /* Full viewport height */
+}
+
+/* Styling for main heading */
+h1 {
+    font-family: 'Montserrat', sans-serif; /* Different font for headings */
+    color: #4CAF50; /* Green color for the heading text */
+}
+
+/* Styling for the form */
+form {
+    background-color: white; /* White background for the form */
+    padding: 20px; /* Space inside the form */
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+}
+
+/* Styling for input fields and button to submit */
+input[type="number"], input[type="submit"] {
+    margin-top: 10px; /* Space above the input fields */
+    padding: 10px; /* Space inside the input fields */
+    border-radius: 5px; /* Rounded corners */
+    border: 1px solid #cccccc; /* Light gray border */
+    width: 100%; /* Full width input fields */
+}
+
+/* More styling for the submit button */
+input[type="submit"] {
+    background-color: #4CAF50; /* Green background for the button */
+    color: white; /* White text color */
+    cursor: pointer; /* Pointer cursor on hover */
+}
+
+/* Change button color when cursor is hovering for a subtle effect */
+input[type="submit"]:hover {
+    background-color: #81C784; /* Slightly lighter green on hover */
+}
+
+/* Styling for displaying recipes */
+ul {
+    list-style-type: none; /* Remove default bullet points */
+    padding: 0; /* Remove default padding */
+}
+
+/* Styling for individual list items (e.g., recipes) */
+li {
+    background-color: white; /* White background for list items */
+    padding: 15px; /* Space inside each list item */
+    margin-bottom: 10px; /* Space below each list item */
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+}
+
+/* Ensure images within list items are well-proportioned */
+li img {
+    max-width: 100%; /* Make sure images do not exceed their container's width */
+    height: auto; /* Maintain image aspect ratio */
+    border-radius: 5px; /* Rounded corners for images */
+}
+
+/* Styling for links */
+a {
+    color: #FF9800; /* Orange color for links */
+    text-decoration: none; /* Remove underline by default */
+}
+
+/* Add underline when cursor is hovering to emphasise links */
+a:hover {
+    text-decoration: underline; /* Underline links on hover */
+}

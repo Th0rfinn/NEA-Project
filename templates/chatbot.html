@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nutrio</title>
+    <style>
+        /* Styling for entire page */
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-color: #f4f4f4;
+        }
+
+        /* Styling for chatbox container */
+        #chatbox {
+            width: 500px;
+            max-width: 90%;
+            border: 1px solid #ddd;
+            padding: 10px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Styling for messages display area */
+        #messages {
+            height: 300px;
+            overflow-y: auto;
+            border: 1px solid #ddd;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+
+        /* Styling for field where users type their messages */
+        #message-input {
+            width: 100%;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+        }
+
+        /* Styling for send button */
+        #send-button {
+            margin-top: 10px;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        /* Change button color slightly when hovered over */
+        #send-button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <!-- The main chatbox container -->
+    <div id="chatbox">
+        <!-- Where the conversation messages will be shown -->
+        <div id="messages"></div>
+        <!-- Field for the user to type their message -->
+        <input type="text" id="message-input" placeholder="Ask me anything about food or nutrition..." />
+        <!-- Button to send the message -->
+        <button id="send-button">Send</button>
+    </div>
+
+    <script>
+        // Handle what happens when click on the send button
+        document.getElementById('send-button').onclick = function() {
+            const userMessage = document.getElementById('message-input').value;
+            
+            // If the message is empty, nothing happens
+            if (userMessage.trim() === "") return;
+            
+            // Display the user's message in the chatbox
+            const messageElement = document.createElement('div');
+            messageElement.textContent = `You: ${userMessage}`;
+            document.getElementById('messages').appendChild(messageElement);
+
+            // Send the user's message to the server
+            fetch('/get_response', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: `message=${encodeURIComponent(userMessage)}`,
+            })
+            .then(response => response.json())
+            .then(data => {
+                // Display the assistant's response in the chatbox
+                const responseElement = document.createElement('div');
+                responseElement.textContent = `Assistant: ${data.response}`;
+                document.getElementById('messages').appendChild(responseElement);
+                // Clear the input field after the message is sent
+                document.getElementById('message-input').value = '';
+            })
+            .catch(error => console.error('Error:', error));  // Log any errors that occur
+        };
+    </script>
+</body>
+</html>
