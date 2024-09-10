@@ -9,7 +9,7 @@ SPOONACULAR_API_KEY = '29e60da263a4461ab634da401a267260'
 SPOONACULAR_API_URL = 'https://api.spoonacular.com/recipes/findByNutrients'
 
 # OpenAI API key to allow user to chat with the chatbot
-OPENAI_API_KEY = 'your_openai_api_key_here'
+OPENAI_API_KEY = xxx #NEED TO FIX
 openai.api_key = OPENAI_API_KEY
 
 @app.route('/')
