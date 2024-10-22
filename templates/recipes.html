@@ -3,31 +3,54 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Recipes</title>
-    <!-- Link to the CSS for styling this page -->
+    <title>Calorie-Based Recipe Finder & Meal Tracker</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
-    <!-- Main heading showing the calorie limit used for recipe searching -->
-    <h1>Recipes Under {{ request.form.calories }} Calories</h1>
+    <div class="container">
+        <div class="main-content">
+            <h1>Find Recipes Based on Calorie Count</h1>
 
-    <!-- List to display the recipes -->
-    <ul>
-    {% for recipe in recipes %}
-        <li>
-            <!-- Recipe title as a subheading -->
-            <h2>{{ recipe['title'] }}</h2>
-            <!-- Display the number of calories for the recipe -->
-            <p>{{ recipe['calories'] }} calories</p>
-            <!-- Display the recipe image -->
-            <img src="{{ recipe['image'] }}" alt="{{ recipe['title'] }}" style="width:200px;height:auto;">
-            <!-- Link to view the full recipe on Spoonacular -->
-            <p><a href="https://spoonacular.com/recipes/{{ recipe['title'] | replace(' ', '-') }}-{{ recipe['id'] }}" target="_blank">View Full Recipe</a></p>
-        </li>
-    {% endfor %}
-    </ul>
+            <form action="/get_recipes" method="POST">
+                <label for="calories">Enter Maximum Calories:</label>
+                <input type="number" id="calories" name="calories" required>
+                <input type="submit" value="Search Recipes">
+            </form>
 
-    <!-- Link to return to the search page and try again -->
-    <a href="/">Search Again</a>
+            <!-- Recipe Suggestion Form -->
+            <h2>Get Recipe Suggestions Based on Protein</h2>
+            <form action="/get_suggestions" method="POST">
+                <label for="calories">Enter Maximum Calories:</label>
+                <input type="number" id="calories" name="calories" required>
+                <input type="submit" value="Get Suggestions">
+            </form>
+        </div>
+
+        <div class="meal-history">
+            <h2>Meal History</h2>
+            <ul>
+                {% for meal in meal_history %}
+                    <li>{{ meal }}</li>
+                {% else %}
+                    <li>No meals logged yet.</li>
+                {% endfor %}
+            </ul>
+
+            <form action="/log_meal" method="POST">
+                <input type="text" name="meal" placeholder="Enter meal" required>
+                <input type="submit" value="Log Meal">
+            </form>
+
+            <form action="/undo_meal" method="POST">
+                <input type="submit" value="Undo Last Meal">
+            </form>
+
+            <form action="/clear_meals" method="POST">
+                <input type="submit" value="Clear All Meals">
+            </form>
+        </div>
+    </div>
+
+    <p>Need help? <a href="/chatbot" target="_blank">Ask Nutrio, our Nutrition Chatbot</a></p>
 </body>
 </html>
