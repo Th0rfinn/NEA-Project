@@ -75,7 +75,42 @@ a {
     text-decoration: none; /* Remove underline by default */
 }
 
-/* Add underline when cursor is hovering to emphasise links */
+/* Add underline when cursor is hovering to emphasize links */
 a:hover {
     text-decoration: underline; /* Underline links on hover */
+}
+
+/* New additions for meal history layout */
+.container {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+    width: 100%; /* Make sure it stretches across the viewport */
+}
+
+.main-content {
+    width: 60%; /* Main content takes up most of the width */
+    color: #333;
+}
+
+.meal-history {
+    width: 30%; /* Smaller width for the meal history */
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 10px;
+    border-radius: 8px;
+    font-size: 0.9rem; /* Smaller font for meal history */
+    color: black;
+}
+
+.meal-history h2 {
+    text-align: center;
+}
+
+.meal-history ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.meal-history form {
+    margin-bottom: 10px;
 }
