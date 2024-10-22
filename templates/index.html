@@ -3,24 +3,54 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calorie-Based Recipe Finder</title>
-    <!-- Link to the external CSS file for styling -->
+    <title>Calorie-Based Recipe Finder & Meal Tracker</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
-    <!-- Main heading for page -->
-    <h1>Find Recipes Based on Calorie Count</h1>
+    <div class="container">
+        <div class="main-content">
+            <h1>Find Recipes Based on Calorie Count</h1>
 
-    <!-- Form for the user to type the maximum calorie count -->
-    <form action="/get_recipes" method="POST">
-        <!-- Label and input field for entering the calorie limit -->
-        <label for="calories">Enter Maximum Calories:</label>
-        <input type="number" id="calories" name="calories" required>
-        <!-- Submit button to search recipes -->
-        <input type="submit" value="Search Recipes">
-    </form>
+            <form action="/get_recipes" method="POST">
+                <label for="calories">Enter Maximum Calories:</label>
+                <input type="number" id="calories" name="calories" required>
+                <input type="submit" value="Search Recipes">
+            </form>
 
-    <!-- Link to the chatbot page for additional help -->
+            <!-- Recipe Suggestion Form -->
+            <h2>Get Recipe Suggestions Based on Protein</h2>
+            <form action="/get_suggestions" method="POST">
+                <label for="calories">Enter Maximum Calories:</label>
+                <input type="number" id="calories" name="calories" required>
+                <input type="submit" value="Get Suggestions">
+            </form>
+        </div>
+
+        <div class="meal-history">
+            <h2>Meal History</h2>
+            <ul>
+                {% for meal in meal_history %}
+                    <li>{{ meal }}</li>
+                {% else %}
+                    <li>No meals logged yet.</li>
+                {% endfor %}
+            </ul>
+
+            <form action="/log_meal" method="POST">
+                <input type="text" name="meal" placeholder="Enter meal" required>
+                <input type="submit" value="Log Meal">
+            </form>
+
+            <form action="/undo_meal" method="POST">
+                <input type="submit" value="Undo Last Meal">
+            </form>
+
+            <form action="/clear_meals" method="POST">
+                <input type="submit" value="Clear All Meals">
+            </form>
+        </div>
+    </div>
+
     <p>Need help? <a href="/chatbot" target="_blank">Ask Nutrio, our Nutrition Chatbot</a></p>
 </body>
 </html>
