@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recipe Suggestions</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <h1>Suggested Recipe</h1>
+    <h2>{{ recipe['title'] }}</h2>
+    <p>{{ recipe['protein'] }} grams of protein</p>
+    <p>{{ recipe['calories'] }} calories</p>
+    <img src="{{ recipe['image'] }}" alt="{{ recipe['title'] }}">
+    <p><a href="https://spoonacular.com/recipes/{{ recipe['title'] | replace(' ', '-') }}-{{ recipe['id'] }}" target="_blank">View Full Recipe</a></p>
+    <a href="/">Search Again</a>
+</body>
+</html>
