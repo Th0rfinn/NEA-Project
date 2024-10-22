@@ -3,54 +3,54 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calorie-Based Recipe Finder & Meal Tracker</title>
+    <title>Recipes</title>
+    <!-- Link to the CSS for styling this page -->
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
-    <div class="container">
-        <div class="main-content">
-            <h1>Find Recipes Based on Calorie Count</h1>
+    <!-- Main heading showing the calorie limit used for recipe searching -->
+    <h1>Recipes Under {{ request.form.calories }} Calories</h1>
 
-            <form action="/get_recipes" method="POST">
-                <label for="calories">Enter Maximum Calories:</label>
-                <input type="number" id="calories" name="calories" required>
-                <input type="submit" value="Search Recipes">
-            </form>
+    <!-- Section for Breakfast Recipes -->
+    <h2>Breakfast Recipes</h2>
+    <ul>
+    {% for recipe in recipes.breakfast %}
+        <li>
+            <h2>{{ recipe['title'] }}</h2>
+            <p>{{ recipe['calories'] }} calories</p>
+            <img src="{{ recipe['image'] }}" alt="{{ recipe['title'] }}" style="width:200px;height:auto;">
+            <p><a href="https://spoonacular.com/recipes/{{ recipe['title'] | replace(' ', '-') }}-{{ recipe['id'] }}" target="_blank">View Full Recipe</a></p>
+        </li>
+    {% endfor %}
+    </ul>
 
-            <!-- Recipe Suggestion Form -->
-            <h2>Get Recipe Suggestions Based on Protein</h2>
-            <form action="/get_suggestions" method="POST">
-                <label for="calories">Enter Maximum Calories:</label>
-                <input type="number" id="calories" name="calories" required>
-                <input type="submit" value="Get Suggestions">
-            </form>
-        </div>
+    <!-- Section for Lunch Recipes -->
+    <h2>Lunch Recipes</h2>
+    <ul>
+    {% for recipe in recipes.lunch %}
+        <li>
+            <h2>{{ recipe['title'] }}</h2>
+            <p>{{ recipe['calories'] }} calories</p>
+            <img src="{{ recipe['image'] }}" alt="{{ recipe['title'] }}" style="width:200px;height:auto;">
+            <p><a href="https://spoonacular.com/recipes/{{ recipe['title'] | replace(' ', '-') }}-{{ recipe['id'] }}" target="_blank">View Full Recipe</a></p>
+        </li>
+    {% endfor %}
+    </ul>
 
-        <div class="meal-history">
-            <h2>Meal History</h2>
-            <ul>
-                {% for meal in meal_history %}
-                    <li>{{ meal }}</li>
-                {% else %}
-                    <li>No meals logged yet.</li>
-                {% endfor %}
-            </ul>
+    <!-- Section for Dinner Recipes -->
+    <h2>Dinner Recipes</h2>
+    <ul>
+    {% for recipe in recipes.dinner %}
+        <li>
+            <h2>{{ recipe['title'] }}</h2>
+            <p>{{ recipe['calories'] }} calories</p>
+            <img src="{{ recipe['image'] }}" alt="{{ recipe['title'] }}" style="width:200px;height:auto;">
+            <p><a href="https://spoonacular.com/recipes/{{ recipe['title'] | replace(' ', '-') }}-{{ recipe['id'] }}" target="_blank">View Full Recipe</a></p>
+        </li>
+    {% endfor %}
+    </ul>
 
-            <form action="/log_meal" method="POST">
-                <input type="text" name="meal" placeholder="Enter meal" required>
-                <input type="submit" value="Log Meal">
-            </form>
-
-            <form action="/undo_meal" method="POST">
-                <input type="submit" value="Undo Last Meal">
-            </form>
-
-            <form action="/clear_meals" method="POST">
-                <input type="submit" value="Clear All Meals">
-            </form>
-        </div>
-    </div>
-
-    <p>Need help? <a href="/chatbot" target="_blank">Ask Nutrio, our Nutrition Chatbot</a></p>
+    <!-- Link to return to the search page and try again -->
+    <a href="/">Search Again</a>
 </body>
 </html>
